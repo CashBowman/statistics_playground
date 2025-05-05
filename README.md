@@ -1,5 +1,7 @@
 # Streamlit Statistical Demonstrations
 
+**Link to [App](https://blank-app-pctuuyjof7r.streamlit.app/)**
+
 A collection of interactive, educational visualizations for core statistical concepts built with [Streamlit](https://streamlit.io/). Ideal for students, educators, and data enthusiasts looking to deepen their understanding through simulation and visual exploration.
 
 ## Included Demonstrations
