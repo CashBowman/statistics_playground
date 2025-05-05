@@ -51,9 +51,6 @@ streamlit run app.py
 | Confidence Intervals | Monte Carlo π | Central Limit Theorem |
 |----------------------|----------------|-------------------------|
 | ![Confidence Interval](./confidence_interval_sim.png) | ![Monte Carlo Pi](./monte_carlo_sim.png) | ![CLT](./clt_sim.png) |
-
-> _Screenshots should be added manually under `docs/screenshots/` for proper display._
-
 ---
 
 ## Educational Value
