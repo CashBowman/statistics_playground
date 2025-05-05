@@ -63,13 +63,6 @@ This app is great for:
 - Live lectures or workshops
 - Interactive learning via self-paced exploration
 - Demonstrating core statistical ideas without complex math
-
----
-
-## License
-
-This project is licensed under the MIT License.
-
 ---
 
 ## Acknowledgments
@@ -79,3 +72,5 @@ Built using:
 - [Matplotlib](https://matplotlib.org/)
 - [SciPy](https://www.scipy.org/)
 - [Statsmodels](https://www.statsmodels.org/)
+
+### Readme created with chatgpt
