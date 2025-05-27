@@ -157,14 +157,12 @@ else:
     **Key insight:** Sample means become normally distributed as sample size increases, 
     regardless of population distribution shape.
     """)
-    
+
     # Parameters
     col1, col2 = st.columns(2)
     with col1:
         pop_dist = st.selectbox("Population Distribution", 
                               ["Exponential", "Uniform", "Binomial", "Poisson"])
-        
-        # Distribution-specific parameters
         if pop_dist == "Exponential":
             scale = st.slider("Scale (β)", 0.1, 10.0, 1.0)
         elif pop_dist == "Uniform":
@@ -175,51 +173,61 @@ else:
             p_success = st.slider("Success Probability", 0.01, 0.99, 0.3)
         else:  # Poisson
             lambda_ = st.slider("Lambda (λ)", 0.1, 20.0, 5.0)
-    
+
     with col2:
         sample_size = st.slider("Sample Size (n)", 1, 50, 5)
         n_samples = st.slider("Number of Samples", 100, 10000, 1000)
-    
-    # Generate population
-    if pop_dist == "Exponential":
-        data = np.random.exponential(scale, 100000)
-    elif pop_dist == "Uniform":
-        data = np.random.uniform(low, high, 100000)
-    elif pop_dist == "Binomial":
-        data = np.random.binomial(n_trials, p_success, 100000)
-    else:  # Poisson
-        data = np.random.poisson(lambda_, 100000)
-    
-    # Simulation
+
     if st.button("Run CLT Simulation"):
         sample_means = []
+
         for _ in range(n_samples):
-            sample = np.random.choice(data, sample_size)
+            if pop_dist == "Exponential":
+                sample = np.random.exponential(scale, sample_size)
+            elif pop_dist == "Uniform":
+                sample = np.random.uniform(low, high, sample_size)
+            elif pop_dist == "Binomial":
+                sample = np.random.binomial(n_trials, p_success, sample_size)
+            else:  # Poisson
+                sample = np.random.poisson(lambda_, sample_size)
             sample_means.append(np.mean(sample))
-        
+
         # Plotting
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))
-        
+
         # Population distribution
-        ax1.hist(data, bins=50, density=True, alpha=0.7)
+        if pop_dist == "Exponential":
+            pop_data = np.random.exponential(scale, 100000)
+            ax1.hist(pop_data, bins=50, density=True, alpha=0.7)
+        elif pop_dist == "Uniform":
+            pop_data = np.random.uniform(low, high, 100000)
+            ax1.hist(pop_data, bins=50, density=True, alpha=0.7)
+        elif pop_dist == "Binomial":
+            from scipy.stats import binom
+            x = np.arange(0, n_trials + 1)
+            pmf = binom.pmf(x, n_trials, p_success)
+            ax1.bar(x, pmf, alpha=0.7)
+        else:  # Poisson
+            from scipy.stats import poisson
+            x = np.arange(0, int(lambda_ + 4 * np.sqrt(lambda_)))
+            pmf = poisson.pmf(x, lambda_)
+            ax1.bar(x, pmf, alpha=0.7)
+
         ax1.set_title(f"Population Distribution ({pop_dist})")
-        
+
         # Sample means distribution
         ax2.hist(sample_means, bins=50, density=True, alpha=0.7, color='orange')
-        
-        # Overlay normal curve
-        mu, std = np.mean(sample_means), np.std(sample_means)
+        mu = np.mean(sample_means)
+        std = np.std(sample_means)
         x = np.linspace(mu - 3*std, mu + 3*std, 100)
         ax2.plot(x, stats.norm.pdf(x, mu, std), 'r-', lw=2)
         ax2.set_title(f"Distribution of Sample Means (n={sample_size})")
-        
-        # Add annotation with parameters
         ax2.annotate(f"μ = {mu:.3f}\nσ = {std:.3f}", 
-                    xy=(0.95, 0.95), xycoords='axes fraction',
-                    ha='right', va='top', fontsize=12,
-                    bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
-        
+                     xy=(0.95, 0.95), xycoords='axes fraction',
+                     ha='right', va='top', fontsize=12,
+                     bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+
         st.pyplot(fig)
         plt.clf()
-    
+
     reset_button()
