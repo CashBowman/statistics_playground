@@ -2,7 +2,7 @@
 
 **Link to [App](https://blank-app-pctuuyjof7r.streamlit.app/)**
 
-A collection of interactive, educational visualizations for core statistical concepts built with [Streamlit](https://streamlit.io/). Ideal for students, educators, and data enthusiasts looking to deepen their understanding through simulation and visual exploration.
+A collection of educational visualizations for core statistical concepts built with [Streamlit](https://streamlit.io/). Ideal for students, educators, and data enthusiasts looking to explore statistics with simulation and interaction.
 
 ## Included Demonstrations
 
@@ -39,11 +39,10 @@ Demonstrate how sample means approach a normal distribution, even when the popul
 
 ## Educational Value
 
-This app is great for:
+I made this app for:
 - Introductory stats courses
 - Live lectures or workshops
-- Interactive learning via self-paced exploration
-- Demonstrating core statistical ideas without complex math
+- Interactive learning
 ---
 
 ## Acknowledgments
@@ -53,5 +52,3 @@ Built using:
 - [Matplotlib](https://matplotlib.org/)
 - [SciPy](https://www.scipy.org/)
 - [Statsmodels](https://www.statsmodels.org/)
-
-### Readme created with chatgpt
