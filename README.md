@@ -27,25 +27,7 @@ Demonstrate how sample means approach a normal distribution, even when the popul
 - Choose population distributions: Exponential, Uniform, Binomial, Poisson.
 - Adjust sample size and number of samples.
 - Visualize both population and sampling distribution with a normal curve overlay.
-
----
-
-## Getting Started
-
-### Prerequisites
-
-Make sure you have Python 3.7+ installed. Then install dependencies:
-
-```bash
-pip install streamlit numpy matplotlib scipy statsmodels
-```
-
-### Run the App
-
-```bash
-streamlit run app.py
-```
-
+  
 ---
 
 ## Screenshots
